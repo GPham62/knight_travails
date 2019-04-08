@@ -55,9 +55,9 @@ class KnightMoves
 
   def display_number_of_steps
     if count_steps(vertices_in_current_depth[0]) == 1
-      puts "You have completed the goal in #{count_steps(vertices_in_current_depth[0])} step. Here is your path:"
+      puts "You have reached the destination in #{count_steps(vertices_in_current_depth[0])} step. Here is your path:"
     else
-      puts "You have completed the goal in #{count_steps(vertices_in_current_depth[0])} steps. Here is your path:"
+      puts "You have reached the destination in #{count_steps(vertices_in_current_depth[0])} steps. Here is your path:"
     end
   end
 
@@ -79,15 +79,6 @@ class KnightMoves
     path_to_destination.reverse!.each { |coord| puts "#{coord}" }
   end
 
-  def compute
-    return determine_valid_inputs if origin == destination || invalid_origin? || invalid_destination?
-    enqueue_origin_and_record_visited_coordinates
-    explore_vertex(queue.shift)
-    search_shortest_path
-    display_number_of_steps
-    determine_path_to_destination
-  end
-    #
   def count_steps(destination)
       current_vertex = destination
     steps = 0
@@ -98,4 +89,14 @@ class KnightMoves
     end
     steps
   end
+  
+  def compute
+    return determine_valid_inputs if origin == destination || invalid_origin? || invalid_destination?
+    enqueue_origin_and_record_visited_coordinates
+    explore_vertex(queue.shift)
+    search_shortest_path
+    display_number_of_steps
+    determine_path_to_destination
+  end
+    
 end
